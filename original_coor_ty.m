@@ -1,4 +1,6 @@
 function [x,y,z,u,v,k,lar_x,lar_y,lar_z,lar_u,lar_v,lar_k]=original_coor_ty(timestep,start_num,max_bead_num)
+start_z = 7;
+max_z = 20;
 
 number=((max_bead_num-start_num+1)-mod((max_bead_num-start_num+1),20))/20; 
 Atemp=zeros(number,3);
@@ -67,22 +69,18 @@ BG_matrix = imread('Cell_1_0.tif');
 for k=1:169
     BG_matrix(:,:,k+1) = imread(sprintf('Cell_1_%d.tif', k));
 end
+BG_matrix = padarray(BG_matrix,[6,6,1],0);
 
-erase2um = 1;
-erase2umij = erase2um * 12;
-for k=2:170-erase2um
-    for i=1:1002-erase2um*12
-        for j=1:1004-erase2um*12 
-           if (sum(sum(sum(BG_matrix(i:i+erase2umij,j:j+erase2umij,k-erase2um:k+erase2um))))-sum(sum(sum(BG_matrix(i+1:i+erase2umij-1,j+1:j+erase2umij-1,k-erase2um+1:k+erase2um-1)))))==0
-               BG_matrix(i+1:i+erase2umij-1,j+1:j+erase2umij-1,k) = 0;
-           elseif i <= erase2umij && (sum(sum(sum(BG_matrix(i:i+erase2umij,j:j+erase2umij,k-erase2um:k+erase2um))))-sum(sum(sum(BG_matrix(i:i+erase2umij-1,j+1:j+erase2umij-1,k-erase2um+1:k+erase2um-1)))))==0
-               BG_matrix(i:i+erase2umij-1,j+1:j+erase2umij-1,k) = 0;
-           elseif i >= 1002-erase2umij && (sum(sum(sum(BG_matrix(i:i+erase2umij,j:j+erase2umij,k-erase2um:k+erase2um))))-sum(sum(sum(BG_matrix(i+1:i+erase2umij,j+1:j+erase2umij-1,k-erase2um+1:k+erase2um-1)))))==0
-               BG_matrix(i+1:i+erase2umij,j+1:j+erase2umij-1,k) = 0;
-           elseif j <= erase2umij && (sum(sum(sum(BG_matrix(i:i+erase2umij,j:j+erase2umij,k-erase2um:k+erase2um))))-sum(sum(sum(BG_matrix(i+1:i+erase2umij-1,j:j+erase2umij-1,k-erase2um+1:k+erase2um-1)))))==0
-               BG_matrix(i+1:i+erase2umij-1,j:j+erase2umij-1,k) = 0;
-           elseif j >= erase2umij && (sum(sum(sum(BG_matrix(i:i+erase2umij,j:j+erase2umij,k-erase2um:k+erase2um))))-sum(sum(sum(BG_matrix(i:i+erase2umij-1,j+1:j+erase2umij,k-erase2um+1:k+erase2um-1)))))==0
-               BG_matrix(i+1:i+erase2umij-1,j+1:j+erase2umij,k) = 0;
+erase1um = 1;
+erase1umij = erase1um * 6;
+for k=start_z+1:max_z+1
+    for i=1:1002+6-erase1umij*3+1
+        for j=1:1004+6-erase1umij*3+1
+           if (sum(sum(sum(BG_matrix(i:i+erase1umij*3-1,j:j+erase1umij*3-1,k-erase1um:k+erase1um))))-sum(sum(sum(BG_matrix(i+erase1umij:i+erase1umij*2-1,j+erase1umij:j+erase1umij*2-1,k-erase1um+1:k+erase1um-1)))))==0
+               if sum(sum(sum(BG_matrix(i:i+erase1umij*3-1,j:j+erase1umij*3-1,k-erase1um:k+erase1um)))) ~= 0
+                   [k i j]
+               end
+               BG_matrix(i+erase1umij:i+erase1umij*2-1,j+erase1umij:j+erase1umij*2-1,k) = 0;
            end
        end
    end
@@ -93,7 +91,7 @@ end
 X = [];
 Y = [];
 Z = [];
-for ztmp = 7:20
+for ztmp = start_z:max_z
    I = BG_matrix(:,:,ztmp+1);
    for i = 1:1002
       for j = 1:1004

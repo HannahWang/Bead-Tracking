@@ -22,8 +22,8 @@ if timestep == 2
     y = y-2;
     z = z+1;   
 end
-x = x/12;
-y = y/12;
+x = x/6;
+y = y/6;
 A=[x y z];
 
 end
