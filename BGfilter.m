@@ -5,23 +5,23 @@ threshold = 170;
 ll=4;
 eraseS=9;
 if t == 1
-    I_BG3 = imread('Cell_BG.tif');
+    I_BG3 = imread('CELL/Cell_BG.tif');
     I_BG3 = im2uint16(I_BG3)/300;
-    I_BG168 = imread('BFframe_t000001_0168.tif');
-    I_BG169_2 = imread('BFframe_t000001_0169.tif');
+    I_BG168 = imread(getBFfileName(168,1));
+    I_BG169_2 = imread(getBFfileName(169,1));
     I_BG169 = (I_BG168+I_BG169_2)/2;
-    I_BG003 = imread('BFframe_t000001_0003.tif');
-    I_BG004 = imread('BFframe_t000001_0004.tif');
+    I_BG003 = imread(getBFfileName(3,1));
+    I_BG004 = imread(getBFfileName(4,1));
     I_BG001 = (I_BG003+I_BG004)/2;
     I_BG=I_BG3*k2+I_BG169*k1+I_BG001*(1-k1);
 elseif t == 2
-    I_BG3 = imread('Cell_BG.tif');
+    I_BG3 = imread('CELL/Cell_BG.tif');
     I_BG3 = im2uint16(I_BG3)/300;
-    I_BG168=imread('BFframe_t000002_00000168.tif');
-    I_BG169_2=imread('BFframe_t000002_00000169.tif');
+    I_BG168=imread(getBFfileName(168,2));
+    I_BG169_2=imread(getBFfileName(169,2));
     I_BG169 = (I_BG168+I_BG169_2)/2;
-    I_BG003=imread('BFframe_t000002_00000003.tif');
-    I_BG004=imread('BFframe_t000002_00000004.tif');
+    I_BG003=imread(getBFfileName(3,2));
+    I_BG004=imread(getBFfileName(4,2));
     I_BG001 = (I_BG003+I_BG004)/2;
     I_BG=I_BG3*k2+I_BG169*k1+I_BG001*(1-k1);
 end
@@ -59,6 +59,6 @@ end
 
 %figure,
 imshowpair(BWdfill,I,'montage');
-imwrite(BWdfill,sprintf('Copy_of_StrainEnergy3D_SD_2015_12_31/Cell_%d_%d.tif', t, z))
+imwrite(BWdfill,sprintf('Copy_of_StrainEnergy3D_SD_2015_12_31/CELL/Cell_%d_%d.tif', t, z))
 
 end

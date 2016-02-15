@@ -14,7 +14,7 @@ function fname=getFLfileName(z,t)
 % ------------------------------------------------------------------------
 % adjust to your naming convention
 % ------------------------------------------------------------------------
-fname = sprintf('FLframe_t%06i_%04i.tif', t, z);
+fname = sprintf('FLFRAME/FLframe_t%06i_%04i.tif', t, z);
 
 end
 

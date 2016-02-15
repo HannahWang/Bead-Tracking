@@ -65,9 +65,9 @@ for i=1:number
     end
 end
 
-BG_matrix = imread('Cell_1_0.tif');
+BG_matrix = imread('CELL/Cell_1_0.tif');
 for k=1:169
-    BG_matrix(:,:,k+1) = imread(sprintf('Cell_1_%d.tif', k));
+    BG_matrix(:,:,k+1) = imread(sprintf('CELL/Cell_1_%d.tif', k));
 end
 BG_matrix = padarray(BG_matrix,[6,6,1],0);
 
