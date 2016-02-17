@@ -81,7 +81,7 @@ BG_matrix = padarray(BG_matrix,[6,6,1],0);
 
 erase1um = 1;
 erase1umij = erase1um * 6;
-for k=start_z+1:max_z+1
+for k=start_z+1+1:max_z+1+1
     for i=1:1002+6-erase1umij*3+1
         for j=1:1004+6-erase1umij*3+1
            if (sum(sum(sum(BG_matrix(i:i+erase1umij*3-1,j:j+erase1umij*3-1,k-erase1um:k+erase1um))))-sum(sum(sum(BG_matrix(i+erase1umij:i+erase1umij*2-1,j+erase1umij:j+erase1umij*2-1,k-erase1um+1:k+erase1um-1)))))==0
