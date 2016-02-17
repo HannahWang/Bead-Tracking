@@ -1,7 +1,15 @@
-function [x,y,z,u,v,k,lar_x,lar_y,lar_z,lar_u,lar_v,lar_k]=original_coor_ty(timestep,start_num,max_bead_num)
-start_z = 120;
-max_z = 150;
+function [x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w]=original_coor_ty(timestep,start_z,max_z)
 
+bead_tnxyz = evalin('base','bead_tnxyz');
+%find start_num
+n_row_idx = (bead_tnxyz(:,5) == max_z);
+n_filtered = bead_tnxyz(n_row_idx,:);
+start_num = min(n_filtered(:,2));
+%find max_bead_num
+n_row_idx = (bead_tnxyz(:,5) == start_z);
+n_filtered = bead_tnxyz(n_row_idx,:);
+max_bead_num = max(n_filtered(:,2));
+% position 
 number=((max_bead_num-start_num+1)-mod((max_bead_num-start_num+1),20))/20; 
 Atemp=zeros(number,3);
 Atemp2=zeros(number,3);
@@ -96,11 +104,11 @@ for ztmp = start_z:max_z
    for i = 1:1002
       for j = 1:1004
          if I(i,j) == 1
-             for conti = 0:7
+             %for conti = 0:7
                 X(end+1) = i/6;
                 Y(end+1) = j/6;
-                Z(end+1) = ztmp + conti/8;
-             end
+                Z(end+1) = ztmp;% + conti/8;
+             %end
          end
       end
    end
