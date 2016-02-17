@@ -1,6 +1,6 @@
 function [x,y,z,u,v,k,lar_x,lar_y,lar_z,lar_u,lar_v,lar_k]=original_coor_ty(timestep,start_num,max_bead_num)
-start_z = 7;
-max_z = 20;
+start_z = 120;
+max_z = 150;
 
 number=((max_bead_num-start_num+1)-mod((max_bead_num-start_num+1),20))/20; 
 Atemp=zeros(number,3);
@@ -79,8 +79,8 @@ for k=start_z+1:max_z+1
            if (sum(sum(sum(BG_matrix(i:i+erase1umij*3-1,j:j+erase1umij*3-1,k-erase1um:k+erase1um))))-sum(sum(sum(BG_matrix(i+erase1umij:i+erase1umij*2-1,j+erase1umij:j+erase1umij*2-1,k-erase1um+1:k+erase1um-1)))))==0
                if sum(sum(sum(BG_matrix(i:i+erase1umij*3-1,j:j+erase1umij*3-1,k-erase1um:k+erase1um)))) ~= 0
                    [k i j]
-               end
-               BG_matrix(i+erase1umij:i+erase1umij*2-1,j+erase1umij:j+erase1umij*2-1,k) = 0;
+                   BG_matrix(i+erase1umij:i+erase1umij*2-1,j+erase1umij:j+erase1umij*2-1,k) = 0;
+               end             
            end
        end
    end
@@ -96,9 +96,11 @@ for ztmp = start_z:max_z
    for i = 1:1002
       for j = 1:1004
          if I(i,j) == 1
-             X(end+1) = i/6;
-             Y(end+1) = j/6;
-             Z(end+1) = ztmp;
+             for conti = 0:7
+                X(end+1) = i/6;
+                Y(end+1) = j/6;
+                Z(end+1) = ztmp + conti/8;
+             end
          end
       end
    end
