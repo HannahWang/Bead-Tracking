@@ -77,7 +77,7 @@ BG_matrix = imread('CELL/Cell_1_0.tif');
 for k=1:169
     BG_matrix(:,:,k+1) = imread(sprintf('CELL/Cell_1_%d.tif', k));
 end
-BG_matrix = padarray(BG_matrix,[6,6,1],0);
+BG_matrix = padarray(BG_matrix,[6,6,2],0);
 
 erase1um = 1;
 erase1umij = erase1um * 6;
