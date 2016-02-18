@@ -6,11 +6,13 @@ raw = imread(getBFfileName(z,t));
 %mkdir('');
 square_width = 17;
 padding = (square_width-1)/2;
-for i = 1+padding:4:1002-padding
-   for j = 1+padding:4:1004-padding
+for i = 1+padding:6:1002-padding
+   for j = 1+padding:6:1004-padding
        now = raw(i-padding:i+padding,j-padding:j+padding);
        if signal(i,j)
-           imwrite(now, sprintf('Bead-Tracking/LABELS/with_signal/t%d_z%d_%04i_%04i.png',t,z,i,j));
+           save(sprintf('Bead-Tracking/LABELS/with-signal/t%d_z%d_%04i_%04i.mat',t,z,i,j), 'now');
+       %else
+           %save(sprintf('Bead-Tracking/LABELS/no-signal/t%d_z%d_%04i_%04i.mat',t,z,i,j), 'now');
        end
        
    end
