@@ -6,5 +6,6 @@ while ischar(tline)
     bead_tnxyz = [bead_tnxyz; element(1:5)];
     tline = fgets(fin);
 end
+save('bead_tnxyz.mat','bead_tnxyz');
 
 
