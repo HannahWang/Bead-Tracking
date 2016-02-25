@@ -1,4 +1,4 @@
-function [x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,count]=original_coor_ty(timestep,start_z,max_z)
+function [x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,count]=original_coor_ty(timestep,start_z,max_z,sampling)
 
 %bead_tnxyz = evalin('base','bead_tnxyz');
 load('Copy_of_StrainEnergy3D_SD_2015_12_31/bead_tnxyz.mat','bead_tnxyz');
@@ -22,12 +22,12 @@ while n_filt_size(1) == 0
 end
 max_bead_num = max(n_filtered(:,2));
 % position 
-number=((max_bead_num-start_num+1)-mod((max_bead_num-start_num+1),20))/20; 
+number=((max_bead_num-start_num+1)-mod((max_bead_num-start_num+1),sampling))/sampling; 
 Atemp=zeros(number,3);
 Atemp2=zeros(number,3);
 bead_num=1;
 index_i=1;
-for i=start_num:10:max_bead_num+1
+for i=start_num:sampling:max_bead_num+1
 %original
 a1=get_bead_pos_ty(timestep, i);
 Atemp(index_i, :) = a1;
