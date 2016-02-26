@@ -1,5 +1,8 @@
-start_z=20;
-max_z=40;
+start_z=8;
+max_z=24;
+sampling=10;
+timestep=1;
+[x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,count]=original_coor_ty(timestep,start_z,max_z,sampling);
 for t=1:2
 
     BG_matrix = imread(sprintf('CELL/Cell_%d_0.tif',t));
@@ -24,14 +27,14 @@ for t=1:2
 %end
 
 
-    %eval(['X',int2str(t),'=[];']);
+    eval(['X',int2str(t),'=[];']);
     eval(['Y',int2str(t),'=[];']);
     eval(['Z',int2str(t),'=[];']);
 for ztmp=start_z:max_z
     for i = 1:1002
         for j = 1:1004
             if BG_matrix(i,j,ztmp+1) == 1
-               %eval(['X',int2str(t),'(end+1) = i/6;']);
+               eval(['X',int2str(t),'(end+1) = i/6;']);
                eval(['Y',int2str(t),'(end+1) = j/6;']); 
                eval(['Z',int2str(t),'(end+1) = ztmp;']); 
 
@@ -59,7 +62,10 @@ end
 % end
 
 %des_color = [1 0 0;];
-
+%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!check axis!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%
+%
 % plot vector map
 figure
 scatter_color_map = 'bk';

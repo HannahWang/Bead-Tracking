@@ -73,30 +73,27 @@ for t=1:2
     eval(['Y',int2str(t),'=[];']);
     eval(['Z',int2str(t),'=[];']);
 
- 
   for i = 1:1002
      for j = 1:1004
         if BWdfill(i,j) == 1
-            %for conti = 0:7
-               
                eval(['X',int2str(t),'(end+1) = i/6;']);
                eval(['Y',int2str(t),'(end+1) = j/6;']); 
-               %eval(['Z',int2str(t),'(end+1) = 19-',int2str(t),';']); 
-              % Z(end+1) = ztmp;% + conti/8;
-            %end
+               eval(['Z',int2str(t),'(end+1) = ztmp;']); 
+
         end
      end
   end
+
 end
 figure
 scatter_color_map = 'bk';
 for t = 1:2
-    eval(['scatter(X',int2str(t),', Y',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
+    eval(['scatter(X',int2str(t),', Z',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
     hold on
 end
-small_move=quiver(x,y,u,v,'color','green');
+small_move=quiver(x,z,u,w,'color','green');
 hold on
-Lar_move=quiver(lar_x,lar_y,lar_u,lar_v,'color','red');
+Lar_move=quiver(lar_x,lar_z,lar_u,lar_w,'color','red');
 
 %imwrite(BWdfill,sprintf('Copy_of_StrainEnergy3D_SD_2015_12_31/CELL/Cell_%d_%d.tif', t, z))
 
