@@ -1,9 +1,9 @@
-function xy_comparison(min_z,max_z)
+%xy_comparison(min_z,max_z)
 %comparison bead position of different z
 
 bead_tnxyz=evalin('base', 'bead_tnxyz');
-%min_z=2;
-%max_z=5;
+min_z=2;
+max_z=5;
 z_layer_num=max_z-min_z+1;
 
 for z=min_z:max_z
@@ -14,11 +14,13 @@ n_row_idx = (bead_tnxyz(:,5) == z);
 n1_filtered = bead_tnxyz(n_row_idx,:);
 t_row_idx = (n1_filtered(:,1) == 1);
 nt1_filtered = n1_filtered(t_row_idx,:); 
+num_idx=bead_tnxyz(n_row_idx,2);
 
 timestep=2;
 count2=z-min_z+1+z_layer_num;
-t2_row_idx = (n1_filtered(:,1) == 2);
-nt2_filtered = n2_filtered(t2_row_idx,:); 
+A=bead_tnxyz(num_idx,:);
+t2_row_idx = (A(:,1) == timestep);
+nt2_filtered = A(t2_row_idx,:); 
 %take out x y z position
 eval(['x',int2str(count),'= transpose(nt1_filtered(:,3));'])
 eval(['y',int2str(count),'= transpose(nt1_filtered(:,4));'])

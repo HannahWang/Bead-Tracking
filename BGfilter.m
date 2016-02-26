@@ -57,8 +57,8 @@ for i=1:1002-eraseS
 end
 
 
-%figure,
 imshowpair(BWdfill,I,'montage');
-imwrite(BWdfill,sprintf('Copy_of_StrainEnergy3D_SD_2015_12_31/CELL/Cell_%d_%d.tif', t, z))
+title(['fig',num2str(z)],'color','b');
+%imwrite(BWdfill,sprintf('Copy_of_StrainEnergy3D_SD_2015_12_31/CELL/Cell_%d_%d.tif', t, z))
 
 end
