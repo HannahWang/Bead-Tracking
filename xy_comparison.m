@@ -2,7 +2,7 @@
 %comparison bead position of different z
 
 bead_tnxyz=evalin('base', 'bead_tnxyz');
-min_z=2;
+min_z=3;
 max_z=5;
 z_layer_num=max_z-min_z+1;
 
@@ -18,8 +18,8 @@ num_idx=bead_tnxyz(n_row_idx,2);
 
 timestep=2;
 count2=z-min_z+1+z_layer_num;
-A=bead_tnxyz(num_idx,:);
-t2_row_idx = (A(:,1) == timestep);
+A=bead_tnxyz(t_row_idx ,:);
+t2_row_idx = (A(:,1) == 2);
 nt2_filtered = A(t2_row_idx,:); 
 %take out x y z position
 eval(['x',int2str(count),'= transpose(nt1_filtered(:,3));'])
