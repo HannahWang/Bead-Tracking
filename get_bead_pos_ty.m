@@ -7,9 +7,10 @@ function A = get_bead_pos_ty(timestep, bead_num)
 %if ~isVarExist
 %   get_beadtnxyz_han; 
 %end
-%bead_tnxyz = evalin('base','bead_tnxyz');
 
-load('Copy_of_StrainEnergy3D_SD_2015_12_31/bead_tnxyz.mat','bead_tnxyz');
+%load('Copy_of_StrainEnergy3D_SD_2015_12_31/bead_tnxyz.mat');
+bead_tnxyz = evalin('base','bead_tnxyz');
+
 
 n_row_idx = (bead_tnxyz(:,2) == bead_num);
 n_filtered = bead_tnxyz(n_row_idx,:);

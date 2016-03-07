@@ -1,12 +1,13 @@
-start_z=8;
-max_z=24;
+z_min=8;
+z_max=24;
 sampling=10;
 timestep=1;
-[x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,count]=original_coor_ty(timestep,start_z,max_z,sampling);
+load('bead_tnxyz.mat');
+[x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,count]=original_coor_ty(timestep,z_min,z_max,sampling);
 for t=1:2
 
     BG_matrix = imread(sprintf('CELL/Cell_%d_0.tif',t));
-    for k=start_z:max_z
+    for k=z_min:z_max
        BG_matrix(:,:,k+1) = imread(sprintf('CELL/Cell_%d_%d.tif', t, k));
     end
     %BG_matrix = padarray(BG_matrix,[6,6,2],0);
@@ -30,7 +31,7 @@ for t=1:2
     eval(['X',int2str(t),'=[];']);
     eval(['Y',int2str(t),'=[];']);
     eval(['Z',int2str(t),'=[];']);
-for ztmp=start_z:max_z
+for ztmp=z_min:z_max
     for i = 1:1002
         for j = 1:1004
             if BG_matrix(i,j,ztmp+1) == 1
@@ -67,17 +68,40 @@ end
 %
 %
 % plot vector map
-figure
+figure,
 scatter_color_map = 'bk';
 for t = 1:2
     %eval(['scatter3(X',int2str(t),', Y',int2str(t),', Z',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
     eval(['scatter(Y',int2str(t),', Z',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
     hold on
 end
-%small_move=quiver3(x,y,z,u,v,w,'color','green');
-small_move=quiver(y,z,v,w,'color','green');
+
+% quiver(x,y,u,v,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+% hold on
+% quiver(lar_x,lar_y,lar_u,lar_v,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+% xlabel('x axis');
+% ylabel('y axis');
+% title(sprintf('z=%d-%d-xy',z_min,z_max));
+
+% figure,
+% quiver(x,z,u,w,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+% hold on
+% quiver(lar_x,lar_z,lar_u,lar_w,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+% xlabel('x axis');
+% ylabel('z axis');
+% title(sprintf('z=%d-%d-xz',z_min,z_max));
+% 
+figure,
+quiver(y,z,v,w,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
 hold on
+quiver(lar_y,lar_z,lar_v,lar_w,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+xlabel('y axis');
+ylabel('z axis');
+title(sprintf('z=%d-%d-yz',z_min,z_max));
+
+
+%small_move=quiver3(x,y,z,u,v,w,'color','green');
+%hold on
 %Lar_move=quiver3(lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,'color','red');
-Lar_move=quiver(lar_y,lar_z,lar_v,lar_w,'color','red');
 %hold on
 %scatter3(X,Y,Z,5,'.','blue');

@@ -1,6 +1,6 @@
 function [x,y,z,u,v,w,lar_x,lar_y,lar_z,lar_u,lar_v,lar_w,count]=original_coor_ty(t,z_min,z_max,sampling)
 
-load('Copy_of_StrainEnergy3D_SD_2015_12_31/bead_tnxyz.mat');
+load('bead_tnxyz.mat');
 
 
 %find start_num
