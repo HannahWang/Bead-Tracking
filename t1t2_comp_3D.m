@@ -72,16 +72,16 @@ figure,
 scatter_color_map = 'bk';
 for t = 1:2
     %eval(['scatter3(X',int2str(t),', Y',int2str(t),', Z',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
-    eval(['scatter(Y',int2str(t),', Z',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
+    eval(['scatter(X',int2str(t),', Y',int2str(t),' , 5, '' ',scatter_color_map(t),' ''); ']);
     hold on
 end
 
-% quiver(x,y,u,v,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
-% hold on
-% quiver(lar_x,lar_y,lar_u,lar_v,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
-% xlabel('x axis');
-% ylabel('y axis');
-% title(sprintf('z=%d-%d-xy',z_min,z_max));
+quiver(x,y,u,v,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+hold on
+quiver(lar_x,lar_y,lar_u,lar_v,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+xlabel('x axis');
+ylabel('y axis');
+title(sprintf('z=%d-%d-xy',z_min,z_max));
 
 % figure,
 % quiver(x,z,u,w,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
@@ -91,13 +91,13 @@ end
 % ylabel('z axis');
 % title(sprintf('z=%d-%d-xz',z_min,z_max));
 % 
-figure,
-quiver(y,z,v,w,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
-hold on
-quiver(lar_y,lar_z,lar_v,lar_w,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
-xlabel('y axis');
-ylabel('z axis');
-title(sprintf('z=%d-%d-yz',z_min,z_max));
+
+% quiver(y,z,v,w,'color','red','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+% hold on
+% quiver(lar_y,lar_z,lar_v,lar_w,'color','green','MaxHeadSize',0.2,'AutoScaleFactor',0.89,'AutoScale','off');
+% xlabel('y axis');
+% ylabel('z axis');
+% title(sprintf('z=%d-%d-yz',z_min,z_max));
 
 
 %small_move=quiver3(x,y,z,u,v,w,'color','green');
