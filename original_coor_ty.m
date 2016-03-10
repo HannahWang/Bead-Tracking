@@ -52,6 +52,7 @@ next=Atemp2.';
 dis=next-ori;
 dis2=dis;
 
+
 x1=ori(1,:);
 y1=ori(2,:);
 z1=ori(3,:);
